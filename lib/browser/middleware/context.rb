@@ -12,8 +12,8 @@ class Browser
         )
       end
 
-      def redirect_to(path)
-        throw :redirected, path.to_s
+      def redirect_to(path, status=301)
+        throw :redirected, {path => path.to_s, :status => status}
       end
     end
   end

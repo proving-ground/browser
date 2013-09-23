@@ -15,25 +15,25 @@ class Browser
       @env = env
       request = Rack::Request.new(env)
 
-      path = catch(:redirected) do
+      redirect_options = catch(:redirected) do
         Context.new(request).instance_eval(&@block)
       end
 
-      path ? resolve_redirection(request.path, path) : run_app!
+      redirect_options ? resolve_redirection(request.path, redirect_options) : run_app!
     end
 
-    def resolve_redirection(current_path, path)
-      uri = URI.parse(path)
+    def resolve_redirection(current_path, redirect_options)
+      uri = URI.parse(redirect_options[:path])
 
       if uri.path == current_path
         run_app!
       else
-        redirect(path)
+        redirect(redirect_options)
       end
     end
 
-    def redirect(path, status=301)
-      [status, {"Content-Type" => "text/html", "Location" => path}, []]
+    def redirect(redirect_options)
+      [redirect_options[:status], {"Content-Type" => "text/html", "Location" => redirect_options[:path]}, []]
     end
 
     def run_app!
