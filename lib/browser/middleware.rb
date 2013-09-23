@@ -32,8 +32,8 @@ class Browser
       end
     end
 
-    def redirect(path)
-      [301, {"Content-Type" => "text/html", "Location" => path}, []]
+    def redirect(path, status=301)
+      [status, {"Content-Type" => "text/html", "Location" => path}, []]
     end
 
     def run_app!
