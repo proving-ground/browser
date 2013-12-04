@@ -100,6 +100,7 @@ class Browser
     webkit? ||
     (firefox? && version.to_i >= 17) ||
     (ie? && version.to_i >= 9) ||
+    (ie11?) ||
     (opera? && version.to_i >= 12) ||
     (firefox? && tablet? && android? && version.to_i >= 14)
   end
