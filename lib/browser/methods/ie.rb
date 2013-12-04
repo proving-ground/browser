@@ -33,7 +33,7 @@ class Browser
     end
 
     def ie11?
-      !!(ua =~ /Trident/ && ua +~ /rv\:11/)
+      !!(ua =~ /Trident/ && ua =~ /rv\:11/)
     end
 
     # Detect if IE is running in compatibility mode.
