@@ -4,7 +4,7 @@ class Browser
 
     # Detect if browser is Internet Explorer.
     def ie?
-      !!(ua =~ /MSIE/ && ua !~ /Opera/)
+      !!(ua =~ /MSIE/ && ua !~ /Opera/) || ie11?
     end
 
     # Detect if browser is Internet Explorer 6.
@@ -30,6 +30,10 @@ class Browser
     # Detect if browser is Internet Explorer 10.
     def ie10?
       ie? && version == "10"
+    end
+
+    def ie11?
+      !!(ua =~ /Trident/ && ua +~ /rv\:11/)
     end
 
     # Detect if IE is running in compatibility mode.
